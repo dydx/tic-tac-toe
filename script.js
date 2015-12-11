@@ -1,4 +1,4 @@
-/* global alert $ */
+/* global $ location */
 'use strict'
 $(function () {
   class Game {
@@ -11,6 +11,8 @@ $(function () {
       this.winner = null // public
     }
 
+    // I'm not really happy with this. I have this code duplicated three times
+    // as Raymond Hettinger would say, "There must be a better way!"
     playMove (cellNumber) {
       // check for who's playing and assign it
       this.currentPlayer = this.getPlayer()
@@ -36,7 +38,6 @@ $(function () {
       // scan the players' move history and look for winning
       // combinations of moves
       this.checkForWinner()
-
     }
 
     hasWon (player) {
@@ -118,8 +119,9 @@ $(function () {
       $winnerBox.click(function () {
         location.reload()
       })
+
+      // disable the board
       $('.cell').unbind('click')
     }
   })
-
 })
