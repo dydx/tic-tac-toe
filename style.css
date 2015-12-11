@@ -17,6 +17,12 @@ a, a:before, a:after {
   border-radius: 10px;
 }
 
+h1.jumbotron {
+  background: #333;
+  color: #f1f1f1;
+  text-align: center;
+}
+
 .effect6 {
   position:relative;
   -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
