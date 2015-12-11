@@ -4,11 +4,11 @@ $(function () {
   class Game {
     constructor () {
       this.counter = 1
-      this.currentPlayer = null
-      this.allowedMove = true
+      this.currentPlayer = null // public
+      this.allowedMove = true // public, for some reason
       this.playerX = []
       this.playerO = []
-      this.winner = null
+      this.winner = null // public
     }
 
     playMove (cellNumber) {
@@ -114,7 +114,10 @@ $(function () {
 
     if (game.winner !== null) {
       var name = game.winner.toUpperCase()
-      $winnerBox.addClass('alert alert-success').text(`${name} Has Won!`)
+      $winnerBox.addClass('alert alert-success').text(`${name} Has Won! Click here to play again`)
+      $winnerBox.click(function () {
+        location.reload()
+      })
       $('.cell').unbind('click')
     }
   })
