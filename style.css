@@ -1,0 +1,54 @@
+html {
+  box-sizing: border-box;
+}
+
+a, a:before, a:after {
+  box-sizing: inherit;
+}
+
+#container {
+  margin: 1em;
+  padding: 1em;
+  overflow: auto;
+}
+
+#game-board {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+li {
+  font-size: 4em;
+  height: 200px;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  line-height: 200px;
+}
+
+li:hover {
+  background: #f4f4f4;
+}
+
+li:nth-child(2n) {
+  border-left: 1px solid black;
+}
+
+li:nth-child(-n+3) {
+  border-bottom: 1px solid black;
+}
+
+.row:last-child li:nth-last-child(-n+3) {
+  border-bottom: none;
+}
+
+li:nth-child(3n) {
+  border-left: 1px solid black;
+}
