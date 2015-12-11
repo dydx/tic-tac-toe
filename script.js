@@ -115,8 +115,10 @@ $(function () {
 
     if (game.winner !== null) {
       var name = game.winner.toUpperCase()
-      $winnerBox.addClass('alert alert-success').text(`${name} Has Won! Click here to play again`)
-      $winnerBox.click(function () {
+      $('.modal').modal('show')
+
+      $('#winner').text(`${name} Has WON!`)
+      $('#play-again').click(function () {
         location.reload()
       })
 
