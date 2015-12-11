@@ -5,6 +5,7 @@ $(function () {
     constructor () {
       this.counter = 1
       this.currentPlayer = null
+      this.allowedMove = true
       this.playerX = []
       this.playerO = []
       this.winner = null
@@ -14,23 +15,28 @@ $(function () {
       // check for who's playing and assign it
       this.currentPlayer = this.getPlayer()
 
-      // assign the cell to the right player
+      // check if the move is occupied
       if (this.cellIsOccupied(cellNumber)) {
-        alert('Nope')
+        this.allowedMove = false
       } else {
+        this.allowedMove = true
+      }
+
+      // if the cell is free, play the move
+      if (this.allowedMove) {
         if (this.currentPlayer === 'x') {
           this.playerX.push(cellNumber)
         } else if (this.currentPlayer === 'o') {
           this.playerO.push(cellNumber)
         }
+        // incremement the game counter
+        this.counter++
       }
 
       // scan the players' move history and look for winning
       // combinations of moves
       this.checkForWinner()
 
-      // incremement the game counter
-      this.counter++
     }
 
     hasWon (player) {
@@ -92,15 +98,23 @@ $(function () {
 
   $('.cell').click(function (event) {
     var currentCell = $(this).data().cell
+    var $infoBox = $('#info')
+    var $winnerBox = $('#winner')
+
     game.playMove(currentCell)
-    if (game.currentPlayer === 'x') {
-      $(this).html('<span class="glyphicon glyphicon-remove"></span>')
-    } else if (game.currentPlayer === 'o') {
-      $(this).html('<span class="glyphicon glyphicon-ok"></span>')
+    if (game.allowedMove) {
+      if (game.currentPlayer === 'x') {
+        $(this).html('<span class="glyphicon glyphicon-remove"></span>')
+      } else if (game.currentPlayer === 'o') {
+        $(this).html('<span class="glyphicon glyphicon-ok"></span>')
+      }
+    } else {
+      $infoBox.toggleClass('alert alert-danger').text('This move is not allowed').delay(1000).fadeToggle()
     }
 
     if (game.winner !== null) {
-      alert(`${game.winner.toUpperCase()} has won the game!`)
+      var name = game.winner.toUpperCase()
+      $winnerBox.addClass('alert alert-success').text(`${name} Has Won!`)
       $('.cell').unbind('click')
     }
   })
